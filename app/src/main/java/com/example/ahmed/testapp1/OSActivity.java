@@ -2,6 +2,7 @@ package com.example.ahmed.testapp1;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -34,17 +35,17 @@ public class OSActivity extends Activity {
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
-            public void onItemClick(AdapterView<?> parent, final View view,
-                                    int position, long id) {
+            public void onItemClick(AdapterView<?> parent, final View view, final int position, long id) {
                 final String item = (String) parent.getItemAtPosition(position);
-                view.animate().setDuration(2000).alpha(0)
-                        .withEndAction(new Runnable() {
-                            @Override
-                            public void run() {
-                                //Navigation vers l'autre liste
-                                view.setAlpha(1);
-                            }
-                        });
+                //CHERCHER COMMENT DÉMARRER UNE ACTIVITÉ SUR UNE LISTE (AVEC INTENT OU NON)
+                System.out.println("id " +id + " position " + position);
+                //Navigation vers l'autre liste
+                /*switch(position){
+                    case 0 : Intent intent = new Intent(OSActivity.this,browser1Activity.class);
+                             startActivity(intent);
+                }*/
+
+
             }
 
         });
