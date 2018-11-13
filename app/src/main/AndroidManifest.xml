@@ -20,7 +20,8 @@
         </activity>
         <activity android:name=".OSActivity" />
         <activity android:name=".shortcutsActivity" />
-        <activity android:name=".browser1Activity"></activity>
+        <activity android:name=".browser1Activity" />
+        <activity android:name=".ReconnaissanceVocale" />
     </application>
 
 </manifest>
