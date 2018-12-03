@@ -14,7 +14,7 @@ import android.widget.ListView;
 public class ApplicationsActivity extends AppCompatActivity {
     ListView listApplication;
     Button btn_stop;
-    String applicationsList[] = {"Contacts", "Browser", "Alarm"};
+    String applicationsList[] = {"Contacts", "Browser", "Alarm","liste de contacts preferès"};
     Intent intent;
     public static String shorcutName;
     @Override
@@ -36,8 +36,9 @@ public class ApplicationsActivity extends AppCompatActivity {
                     case 1: intent = new Intent(v.getContext(), ChromeActivity.class);
                             shorcutName="Browser/";
                             startActivity(intent);break;
-                    case 2: intent = new Intent(v.getContext(), AlarmActivity.class);
-                            shorcutName="Alarms/";
+
+                    case 2: intent = new Intent(v.getContext(),MediaActivity.class);
+                            shorcutName="Media/";
                             startActivity(intent);break;
                 }
             }

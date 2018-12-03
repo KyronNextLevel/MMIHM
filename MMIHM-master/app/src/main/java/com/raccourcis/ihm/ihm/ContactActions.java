@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 public class ContactActions extends AppCompatActivity {
     ListView listApplication;
-    String applicationsList[] = {"Appeler", "Messager", "supprimer"};
+    String applicationsList[] = {"Appeler","Envoyer un message","supprimer"};
     Intent intent;
     Context context;
     Button btn_stop;
@@ -46,7 +46,7 @@ public class ContactActions extends AppCompatActivity {
                             callIntent.setData(Uri.parse("tel:123456789"));
                             startActivity(callIntent);
                             break;
-                    case 1: context = getApplicationContext();
+                            case 1: context = getApplicationContext();
                             shortcutName=applicationsList[1]+contactName;
                             Toast.makeText(context, "Message en cours",Toast.LENGTH_LONG).show();
                             if (shorcut==1)

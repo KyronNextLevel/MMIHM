@@ -39,6 +39,10 @@
         <activity
             android:name=".ContactActions"
             android:exported="true" />
+        <activity
+            android:name=".CarteVisite"
+            android:exported="true" />
+
 
     </application>
 
