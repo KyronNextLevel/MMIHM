@@ -10,18 +10,18 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
- 
+
 public class SongsManager {
     // SDCard Path
     final String MEDIA_PATH = Environment.getExternalStorageDirectory().getPath();//+"/Music/";//new String("/sdcard/");
     private ArrayList<HashMap<String, String>> songsList = new ArrayList<HashMap<String, String>>();
- 
+
     Activity PlAct;
     // Constructor
     public SongsManager(Activity PlAct){
-    	this.PlAct = PlAct;
+        this.PlAct = PlAct;
     }
- 
+
     /**
      * Function to read all mp3 files from sdcard
      * and store the details in ArrayList
@@ -35,13 +35,13 @@ public class SongsManager {
 //                HashMap<String, String> song = new HashMap<String, String>();
 //                song.put("songTitle", file.getName().substring(0, (file.getName().length() - 4)));
 //                song.put("songPath", file.getPath());
-// 
+//
 //                // Adding each song to SongList
 //                songsList.add(song);
 //            }
 //        }
-    	
-    	String[] STAR = { "*" };        
+
+        String[] STAR = { "*" };
         Uri allsongsuri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
         String selection = MediaStore.Audio.Media.IS_MUSIC + " != 0";
 
@@ -60,20 +60,20 @@ public class SongsManager {
 
 
                     HashMap<String, String> song = new HashMap<String, String>();
-                  song.put("songTitle", song_name);
-                  song.put("songPath", fullpath);
-                  songsList.add(song);
+                    song.put("songTitle", song_name);
+                    song.put("songPath", fullpath);
+                    songsList.add(song);
 
                 } while (cursor.moveToNext());
 
             }
             //cursor.close();
         }
-        
+
         // return songs list array
         return songsList;
     }
- 
+
     /**
      * Class to filter files which are having .mp3 extension
      * */

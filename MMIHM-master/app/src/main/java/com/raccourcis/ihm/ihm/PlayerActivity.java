@@ -18,9 +18,9 @@ import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
- 
+
 public class PlayerActivity extends Activity implements OnCompletionListener, SeekBar.OnSeekBarChangeListener {
- 
+
     private ImageButton btnPlay;
     private ImageButton btnForward;
     private ImageButton btnBackward;
@@ -45,12 +45,12 @@ public class PlayerActivity extends Activity implements OnCompletionListener, Se
     private boolean isShuffle = false;
     private boolean isRepeat = false;
     private ArrayList<HashMap<String, String>> songsList = new ArrayList<HashMap<String, String>>();
- 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_player);
- 
+
         // All player buttons
         btnPlay = (ImageButton) findViewById(R.id.btnPlay);
         btnForward = (ImageButton) findViewById(R.id.btnForward);
@@ -70,24 +70,24 @@ public class PlayerActivity extends Activity implements OnCompletionListener, Se
         mp = new MediaPlayer();
         songManager = new SongsManager(this);
         utils = new Utilities();
- 
+
         // Listeners
         songProgressBar.setOnSeekBarChangeListener(this); // Important
         mp.setOnCompletionListener(this); // Important
- 
+
         // Getting all songs list
         songsList = songManager.getPlayList();
- 
+
         // By default play first song
         playSong(0);
- 
+
         /**
          * Play button click event
          * plays a song and changes button to pause image
          * pauses a song and changes button to play image
          * */
         btnPlay.setOnClickListener(new View.OnClickListener() {
- 
+
             @Override
             public void onClick(View arg0) {
                 // check for already playing
@@ -105,16 +105,16 @@ public class PlayerActivity extends Activity implements OnCompletionListener, Se
                         btnPlay.setImageResource(R.drawable.pause);
                     }
                 }
- 
+
             }
         });
- 
+
         /**
          * Forward button click event
          * Forwards song specified seconds
          * */
         btnForward.setOnClickListener(new View.OnClickListener() {
- 
+
             @Override
             public void onClick(View arg0) {
                 // get current song position
@@ -129,13 +129,13 @@ public class PlayerActivity extends Activity implements OnCompletionListener, Se
                 }
             }
         });
- 
+
         /**
          * Backward button click event
          * Backward song to specified seconds
          * */
         btnBackward.setOnClickListener(new View.OnClickListener() {
- 
+
             @Override
             public void onClick(View arg0) {
                 // get current song position
@@ -148,16 +148,16 @@ public class PlayerActivity extends Activity implements OnCompletionListener, Se
                     // backward to starting position
                     mp.seekTo(0);
                 }
- 
+
             }
         });
- 
+
         /**
          * Next button click event
          * Plays next song by taking currentSongIndex + 1
          * */
         btnNext.setOnClickListener(new View.OnClickListener() {
- 
+
             @Override
             public void onClick(View arg0) {
                 // check if next song is there or not
@@ -169,16 +169,16 @@ public class PlayerActivity extends Activity implements OnCompletionListener, Se
                     playSong(0);
                     currentSongIndex = 0;
                 }
- 
+
             }
         });
- 
+
         /**
          * Back button click event
          * Plays previous song by currentSongIndex - 1
          * */
         btnPrevious.setOnClickListener(new View.OnClickListener() {
- 
+
             @Override
             public void onClick(View arg0) {
                 if(currentSongIndex > 0){
@@ -189,16 +189,16 @@ public class PlayerActivity extends Activity implements OnCompletionListener, Se
                     playSong(songsList.size() - 1);
                     currentSongIndex = songsList.size() - 1;
                 }
- 
+
             }
         });
- 
+
         /**
          * Button Click event for Repeat button
          * Enables repeat flag to true
          * */
         btnRepeat.setOnClickListener(new View.OnClickListener() {
- 
+
             @Override
             public void onClick(View arg0) {
                 if(isRepeat){
@@ -216,13 +216,13 @@ public class PlayerActivity extends Activity implements OnCompletionListener, Se
                 }
             }
         });
- 
+
         /**
          * Button Click event for Shuffle button
          * Enables shuffle flag to true
          * */
         btnShuffle.setOnClickListener(new View.OnClickListener() {
- 
+
             @Override
             public void onClick(View arg0) {
                 if(isShuffle){
@@ -240,38 +240,38 @@ public class PlayerActivity extends Activity implements OnCompletionListener, Se
                 }
             }
         });
- 
+
         /**
          * Button Click event for Play list click event
          * Launches list activity which displays list of songs
          * */
         btnPlaylist.setOnClickListener(new View.OnClickListener() {
- 
+
             @Override
             public void onClick(View arg0) {
                 Intent i = new Intent(getApplicationContext(), PlayListActivity.class);
                 startActivityForResult(i, 100);
             }
         });
- 
+
     }
- 
+
     /**
      * Receiving song index from playlist view
      * and play the song
      * */
     @Override
     protected void onActivityResult(int requestCode,
-                                     int resultCode, Intent data) {
+                                    int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == 100){
-             currentSongIndex = data.getExtras().getInt("songIndex");
-             // play selected song
-             playSong(currentSongIndex);
+            currentSongIndex = data.getExtras().getInt("songIndex");
+            // play selected song
+            playSong(currentSongIndex);
         }
- 
+
     }
- 
+
     /**
      * Function to play a song
      * @param songIndex - index of song
@@ -286,14 +286,14 @@ public class PlayerActivity extends Activity implements OnCompletionListener, Se
             // Displaying Song title
             String songTitle = songsList.get(songIndex).get("songTitle");
             songTitleLabel.setText(songTitle);
- 
+
             // Changing Button Image to pause image
             btnPlay.setImageResource(R.drawable.pause);
- 
+
             // set Progress bar values
             songProgressBar.setProgress(0);
             songProgressBar.setMax(100);
- 
+
             // Updating progress bar
             updateProgressBar();
         } catch (IllegalArgumentException e) {
@@ -304,45 +304,45 @@ public class PlayerActivity extends Activity implements OnCompletionListener, Se
             e.printStackTrace();
         }
     }
- 
+
     /**
      * Update timer on seekbar
      * */
     public void updateProgressBar() {
         mHandler.postDelayed(mUpdateTimeTask, 100);
-    }  
- 
+    }
+
     /**
      * Background Runnable thread
      * */
     private Runnable mUpdateTimeTask = new Runnable() {
-           public void run() {
-               long totalDuration = mp.getDuration();
-               long currentDuration = mp.getCurrentPosition();
- 
-               // Displaying Total Duration time
-               songTotalDurationLabel.setText(""+utils.milliSecondsToTimer(totalDuration));
-               // Displaying time completed playing
-               songCurrentDurationLabel.setText(""+utils.milliSecondsToTimer(currentDuration));
- 
-               // Updating progress bar
-               int progress = (int)(utils.getProgressPercentage(currentDuration, totalDuration));
-               //Log.d("Progress", ""+progress);
-               songProgressBar.setProgress(progress);
- 
-               // Running this thread after 100 milliseconds
-               mHandler.postDelayed(this, 100);
-           }
-        };
- 
+        public void run() {
+            long totalDuration = mp.getDuration();
+            long currentDuration = mp.getCurrentPosition();
+
+            // Displaying Total Duration time
+            songTotalDurationLabel.setText(""+utils.milliSecondsToTimer(totalDuration));
+            // Displaying time completed playing
+            songCurrentDurationLabel.setText(""+utils.milliSecondsToTimer(currentDuration));
+
+            // Updating progress bar
+            int progress = (int)(utils.getProgressPercentage(currentDuration, totalDuration));
+            //Log.d("Progress", ""+progress);
+            songProgressBar.setProgress(progress);
+
+            // Running this thread after 100 milliseconds
+            mHandler.postDelayed(this, 100);
+        }
+    };
+
     /**
      *
      * */
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromTouch) {
- 
+
     }
- 
+
     /**
      * When user starts moving the progress handler
      * */
@@ -351,7 +351,7 @@ public class PlayerActivity extends Activity implements OnCompletionListener, Se
         // remove message Handler from updating progress bar
         mHandler.removeCallbacks(mUpdateTimeTask);
     }
- 
+
     /**
      * When user stops moving the progress hanlder
      * */
@@ -360,14 +360,14 @@ public class PlayerActivity extends Activity implements OnCompletionListener, Se
         mHandler.removeCallbacks(mUpdateTimeTask);
         int totalDuration = mp.getDuration();
         int currentPosition = utils.progressToTimer(seekBar.getProgress(), totalDuration);
- 
+
         // forward or backward to certain seconds
         mp.seekTo(currentPosition);
- 
+
         // update timer progress again
         updateProgressBar();
     }
- 
+
     /**
      * On Song Playing completed
      * if repeat is ON play same song again
@@ -375,7 +375,7 @@ public class PlayerActivity extends Activity implements OnCompletionListener, Se
      * */
     @Override
     public void onCompletion(MediaPlayer arg0) {
- 
+
         // check for repeat is ON or OFF
         if(isRepeat){
             // repeat is on play same song again
@@ -397,11 +397,11 @@ public class PlayerActivity extends Activity implements OnCompletionListener, Se
             }
         }
     }
- 
+
     @Override
-     public void onDestroy(){
-     super.onDestroy();
+    public void onDestroy(){
+        super.onDestroy();
         mp.release();
-     }
- 
+    }
+
 }

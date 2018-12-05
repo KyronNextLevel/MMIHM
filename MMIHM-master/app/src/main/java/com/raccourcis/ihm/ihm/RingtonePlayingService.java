@@ -51,7 +51,7 @@ public class RingtonePlayingService extends Service {
                 intent_main_activity, 0);
 
         // make the notification parameters
-        android.app.Notification notification_popup = new Notification.Builder(this)
+        Notification notification_popup = new Notification.Builder(this)
                 .setContentTitle("An alarm is going off!")
                 .setContentText("Click me!")
                 .setSmallIcon(R.drawable.ic_action_call)

@@ -12,7 +12,7 @@ import android.widget.ListView;
 
 public class ContactActivity extends AppCompatActivity {
     ListView listApplication;
-    String contactsList[] = {"Achraf", "Ahmed", "Peo", "Rana"};
+    String contactsList[] = {"Achraf", "Ahmed", "Peo", "Rana","Antoine","Juan","Mostapha","Remi","Rami","So","Let","simba",};
     Intent intent;
     Button btn_stop;
     public static String shortcutName;
@@ -55,6 +55,66 @@ public class ContactActivity extends AppCompatActivity {
                         startActivity(intent);
                         break;
                     case 3:
+                        intent = new Intent(v.getContext(), ContactActions.class);
+                        contactName=contactsList[3];
+                        shortcutName="Contacts/"+contactName;
+                        startActivity(intent);
+                        break;
+                    case 4:
+                        intent = new Intent(v.getContext(), ContactActions.class);
+                        contactName=contactsList[3];
+                        shortcutName="Contacts/"+contactName;
+                        startActivity(intent);
+                        break;
+                    case 5:
+                        intent = new Intent(v.getContext(), ContactActions.class);
+                        contactName=contactsList[3];
+                        shortcutName="Contacts/"+contactName;
+                        startActivity(intent);
+                        break;
+                    case 6:
+                        intent = new Intent(v.getContext(), ContactActions.class);
+                        contactName=contactsList[3];
+                        shortcutName="Contacts/"+contactName;
+                        startActivity(intent);
+                        break;
+                    case 7:
+                        intent = new Intent(v.getContext(), ContactActions.class);
+                        contactName=contactsList[3];
+                        shortcutName="Contacts/"+contactName;
+                        startActivity(intent);
+                        break;
+                    case 8:
+                        intent = new Intent(v.getContext(), ContactActions.class);
+                        contactName=contactsList[3];
+                        shortcutName="Contacts/"+contactName;
+                        startActivity(intent);
+                        break;
+                    case 9:
+                        intent = new Intent(v.getContext(), ContactActions.class);
+                        contactName=contactsList[3];
+                        shortcutName="Contacts/"+contactName;
+                        startActivity(intent);
+                        break;
+                    case 10:
+                        intent = new Intent(v.getContext(), ContactActions.class);
+                        contactName=contactsList[3];
+                        shortcutName="Contacts/"+contactName;
+                        startActivity(intent);
+                        break;
+                    case 11:
+                        intent = new Intent(v.getContext(), ContactActions.class);
+                        contactName=contactsList[3];
+                        shortcutName="Contacts/"+contactName;
+                        startActivity(intent);
+                        break;
+                    case 12:
+                        intent = new Intent(v.getContext(), ContactActions.class);
+                        contactName=contactsList[3];
+                        shortcutName="Contacts/"+contactName;
+                        startActivity(intent);
+                        break;
+                    case 13:
                         intent = new Intent(v.getContext(), ContactActions.class);
                         contactName=contactsList[3];
                         shortcutName="Contacts/"+contactName;

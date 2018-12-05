@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.raccourcis.ihm.ihm">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.raccourcis.ihm.ihm">
 
     <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
     <uses-permission android:name="com.android.launcher.permission.UNINSTALL_SHORTCUT" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="com.android.launcher.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="com.android.launcher.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -47,11 +46,26 @@
             android:name=".CarteVisite"
             android:exported="true" />
         <activity
+            android:name=".Alarm"
+            android:exported="true" />
+        <activity
+            android:name=".EmploisTemps"
+            android:exported="true" />
+        <activity
             android:name=".MediaActivity"
             android:exported="true" />
         <activity
             android:name=".PlayerActivity"
             android:exported="true" />
+        <activity
+            android:name=".PlayListActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ContactView"
+            android:exported="true" />
+
+
+
 
     </application>
 

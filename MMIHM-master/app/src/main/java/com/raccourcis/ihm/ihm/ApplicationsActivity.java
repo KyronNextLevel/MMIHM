@@ -14,7 +14,7 @@ import android.widget.ListView;
 public class ApplicationsActivity extends AppCompatActivity {
     ListView listApplication;
     Button btn_stop;
-    String applicationsList[] = {"Contacts", "Browser", "Alarm","Media"};
+    String applicationsList[] = {"Contacts", "OpenUrl","Media", "Daily Activities"};
     Intent intent;
     public static String shorcutName;
     @Override
@@ -30,18 +30,17 @@ public class ApplicationsActivity extends AppCompatActivity {
         listApplication.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                 switch(position) {
-                    case 0: intent = new Intent(v.getContext(), ContactActivity.class);
+                    case 0: intent = new Intent(v.getContext(), ContactView.class);
                             shorcutName="Contacts/";
                             startActivity(intent);break;
                     case 1: intent = new Intent(v.getContext(), ChromeActivity.class);
-                            shorcutName="Browser/";
+                            shorcutName="Open URL/";
                             startActivity(intent);break;
-
-                    case 2: intent = new Intent(v.getContext(),AlarmActivity.class);
-                            shorcutName="Alarm/";
+                            case 2: intent = new Intent(v.getContext(),MediaActivity.class);
+                            shorcutName="Media/";
                             startActivity(intent);break;
-                    case 3: intent = new Intent(v.getContext(),MediaActivity.class);
-                        shorcutName="Media/";
+                    case 3: intent = new Intent(v.getContext(),Alarm.class);
+                        shorcutName="Daily Activities/";
                         startActivity(intent);break;
                 }
             }
