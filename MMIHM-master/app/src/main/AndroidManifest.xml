@@ -5,7 +5,8 @@
     <uses-permission android:name="com.android.launcher.permission.UNINSTALL_SHORTCUT" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="com.android.launcher.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="com.android.launcher.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="com.android.launcher.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="19"  />
+    <uses-permission android:name="android.permission.STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -14,7 +15,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".home.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,50 +23,41 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ApplicationsActivity"
+            android:name=".home.ApplicationsActivity"
             android:exported="true" />
         <activity
-            android:name=".ChromeActivity"
+            android:name=".openURL.ChromeActivity"
             android:exported="true" />
         <activity
-            android:name=".AlarmActivity"
+            android:name=".dailyActivities.AlarmActivity"
             android:exported="true" />
         <activity
-            android:name=".ShortcutssActivity"
+            android:name=".home.ShortcutssActivity"
             android:exported="true" />
         <activity
-            android:name=".ReconnaissanceVocale"
+            android:name=".home.ReconnaissanceVocale"
             android:exported="true" />
         <activity
-            android:name=".ContactActivity"
+            android:name=".contacts.ContactActivity"
             android:exported="true" />
         <activity
-            android:name=".ContactActions"
+            android:name=".contacts.ContactActions"
             android:exported="true" />
         <activity
-            android:name=".CarteVisite"
+            android:name=".dailyActivities.DailyActivities"
             android:exported="true" />
         <activity
-            android:name=".Alarm"
+            android:name=".dailyActivities.EmploisTemps"
             android:exported="true" />
         <activity
-            android:name=".EmploisTemps"
+            android:name=".media.MediaActivity"
             android:exported="true" />
         <activity
-            android:name=".MediaActivity"
+            android:name=".media.PlayerActivity"
             android:exported="true" />
         <activity
-            android:name=".PlayerActivity"
+            android:name=".media.PlayListActivity"
             android:exported="true" />
-        <activity
-            android:name=".PlayListActivity"
-            android:exported="true" />
-        <activity
-            android:name=".ContactView"
-            android:exported="true" />
-
-
-
 
     </application>
 
