@@ -21,6 +21,7 @@ import com.raccourcis.ihm.ihm.contacts.ContactActions;
 import com.raccourcis.ihm.ihm.contacts.ContactActivity;
 import com.raccourcis.ihm.ihm.dailyActivities.AlarmActivity;
 import com.raccourcis.ihm.ihm.dailyActivities.DailyActivities;
+import com.raccourcis.ihm.ihm.dailyActivities.EmploisTemps;
 import com.raccourcis.ihm.ihm.openURL.ChromeActivity;
 
 import java.io.BufferedReader;
@@ -155,6 +156,10 @@ public class ShortcutssActivity extends AppCompatActivity {
                     URL = "http://www.facebook.com";
                     intent = new Intent(Intent.ACTION_VIEW);
                     intent.setData(Uri.parse(URL));
+                    startActivity(intent);
+                }
+                if(name.toLowerCase().contains("emploi")){
+                    intent = new Intent(ShortcutssActivity.this, EmploisTemps.class);
                     startActivity(intent);
                 }
 

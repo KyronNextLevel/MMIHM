@@ -41,6 +41,7 @@ public class ContactActivity extends AppCompatActivity {
     public static String shortcutName;
     public static String contactName;
     int shorcut = MainActivity.shorcut;
+    private static final String FILE_NAME = "example.txt";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +53,7 @@ public class ContactActivity extends AppCompatActivity {
         actionBar.setHomeButtonEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
         intent = null;
+        contactName = "";
         btn_stop = (Button) findViewById(R.id.btn_stop);
         detectMotherActivity();
         listApplication = (ListView) findViewById(R.id.ListView);
@@ -59,29 +61,28 @@ public class ContactActivity extends AppCompatActivity {
         listApplication.setAdapter(adapter);
         listApplication.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-                contactName = "";
-                switch (position) {
-                    case 0:
-                        intent = new Intent(v.getContext(), ContactActions.class);
-                        contactName = contactsList[0];
-                        startActivity(intent);
-                        break;
-                    case 1:
-                        intent = new Intent(v.getContext(), ContactActions.class);
-                        contactName = contactsList[1];
-                        startActivity(intent);
-                        break;
-                    case 2:
-                        intent = new Intent(v.getContext(), ContactActions.class);
-                        contactName = contactsList[2];
-                        startActivity(intent);
-                        break;
-                    case 3:
-                        intent = new Intent(v.getContext(), ContactActions.class);
-                        contactName = contactsList[3];
-                        startActivity(intent);
-                        break;
-                }
+            switch (position) {
+                case 0:
+                    intent = new Intent(v.getContext(), ContactActions.class);
+                    contactName = contactsList[0];
+                    startActivity(intent);
+                    break;
+                case 1:
+                    intent = new Intent(v.getContext(), ContactActions.class);
+                    contactName = contactsList[1];
+                    startActivity(intent);
+                    break;
+                case 2:
+                    intent = new Intent(v.getContext(), ContactActions.class);
+                    contactName = contactsList[2];
+                    startActivity(intent);
+                    break;
+                case 3:
+                    intent = new Intent(v.getContext(), ContactActions.class);
+                    contactName = contactsList[3];
+                    startActivity(intent);
+                    break;
+            }
             }
         });
     }
@@ -130,7 +131,6 @@ public class ContactActivity extends AppCompatActivity {
         dialogBuilder.setView(dialogView);
 
         final EditText edt = (EditText) dialogView.findViewById(R.id.edit1);
-
         dialogBuilder.setTitle("Shortcut Name");
         dialogBuilder.setMessage("Enter yout shortcut name ");
         dialogBuilder.setPositiveButton("Done", new DialogInterface.OnClickListener() {
@@ -138,29 +138,37 @@ public class ContactActivity extends AppCompatActivity {
                 //do something with edt.getText().toString();
                 shortcutName=edt.getText().toString();
                 createShortcutOfApp(shortcutName);
-                Write(shortcutName);
+                save();
             }
         });
         dialogBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
-                //pass
             }
         });
         AlertDialog b = dialogBuilder.create();
         b.show();
     }
 
-    public void Write(String shortcutName) {
+    public void save() {
+        String text = shortcutName;
+        FileOutputStream fos = null;
         try {
-            FileOutputStream fileout=openFileOutput("shortcuts.txt", MODE_APPEND);
-            OutputStreamWriter outputWriter=new OutputStreamWriter(fileout);
-            for (int i = 0; i < 10; i++) {
-                outputWriter.write(shortcutName);
-            }
-            outputWriter.close();
-
-        } catch (Exception e) {
+            fos = openFileOutput(FILE_NAME, MODE_APPEND);
+            fos.write(text.getBytes());
+            fos.write(System.lineSeparator().getBytes());
+            //Toast.makeText(this, "Saved to " + getFilesDir() + "/" + FILE_NAME, Toast.LENGTH_LONG).show();
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (fos != null) {
+                try {
+                    fos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 }

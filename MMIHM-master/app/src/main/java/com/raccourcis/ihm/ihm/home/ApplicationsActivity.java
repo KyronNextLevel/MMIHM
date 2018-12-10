@@ -12,14 +12,13 @@ import android.widget.ListView;
 
 import com.raccourcis.ihm.ihm.contacts.ContactActivity;
 import com.raccourcis.ihm.ihm.dailyActivities.DailyActivities;
-import com.raccourcis.ihm.ihm.media.MediaActivity;
 import com.raccourcis.ihm.ihm.openURL.ChromeActivity;
 import com.raccourcis.ihm.ihm.R;
 
 public class ApplicationsActivity extends AppCompatActivity {
     ListView listApplication;
     Button btn_stop;
-    String applicationsList[] = {"Contacts", "OpenUrl","Media", "Daily Activities"};
+    String applicationsList[] = {"Contacts", "OpenUrl","Daily Activities"};
     Intent intent;
     public static String shorcutName;
     @Override
@@ -45,10 +44,7 @@ public class ApplicationsActivity extends AppCompatActivity {
                     case 1: intent = new Intent(v.getContext(), ChromeActivity.class);
                             shorcutName="Open URL/";
                             startActivity(intent);break;
-                    case 2: intent = new Intent(v.getContext(),MediaActivity.class);
-                            shorcutName="Media/";
-                            startActivity(intent);break;
-                    case 3: intent = new Intent(v.getContext(),DailyActivities.class);
+                    case 2: intent = new Intent(v.getContext(),DailyActivities.class);
                             shorcutName="Daily Activities/";
                             startActivity(intent);break;
                 }
@@ -60,8 +56,6 @@ public class ApplicationsActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 //Write your logic here
-                intent = new Intent(ApplicationsActivity.this,ShortcutssActivity.class);
-                startActivity(intent);
                 this.finish();
                 return true;
             default:

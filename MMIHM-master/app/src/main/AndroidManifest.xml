@@ -50,13 +50,7 @@
             android:name=".dailyActivities.EmploisTemps"
             android:exported="true" />
         <activity
-            android:name=".media.MediaActivity"
-            android:exported="true" />
-        <activity
-            android:name=".media.PlayerActivity"
-            android:exported="true" />
-        <activity
-            android:name=".media.PlayListActivity"
+            android:name=".dailyActivities.BeforeEmploisTemps"
             android:exported="true" />
 
     </application>

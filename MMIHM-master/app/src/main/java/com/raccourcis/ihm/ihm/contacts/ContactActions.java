@@ -34,7 +34,7 @@ public class ContactActions extends AppCompatActivity {
     Context context;
     Button btn_stop;
     public static String shortcutName;
-    public static String contactName= ContactActivity.contactName;
+    public static String contactName;
     int shorcut = MainActivity.shorcut;
     String phoneNumber;
     private static final String FILE_NAME = "example.txt";
@@ -43,6 +43,15 @@ public class ContactActions extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.listview);
+        contactName=ContactActivity.contactName;
+        if(contactName=="Rana")
+            phoneNumber="0652421124";
+        if(contactName=="Achraf")
+            phoneNumber="0725441237";
+        if(contactName=="Ahmed")
+            phoneNumber="0476881934";
+        if(contactName=="Peo")
+            phoneNumber="0605899910";
         getSupportActionBar().setTitle("Contacts - "+contactName);
         // Return Button on action Bar
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
@@ -61,30 +70,24 @@ public class ContactActions extends AppCompatActivity {
                 switch(position) {
 
                     case 0: shortcutName=applicationsList[0]+contactName;
-                            if(contactName=="Rana")
-                                phoneNumber="tel:0652421124";
-                            if(contactName=="Achraf")
-                                phoneNumber="tel:0725441237";
-                            if(contactName=="Ahmed")
-                                phoneNumber="tel:0476881934";
-                            if(contactName=="Peo")
-                                phoneNumber="tel:0605899910";
-                            Intent callIntent = new Intent(Intent.ACTION_DIAL);
-                            callIntent.setData(Uri.parse(phoneNumber));
+                            intent = new Intent(Intent.ACTION_DIAL);
+                            intent.setData(Uri.parse("tel:"+phoneNumber));
                             if (shorcut==1)
-                                createShortcutOfApp2(shortcutName,callIntent);
+                                createShortcutOfApp2(shortcutName,intent);
                             else {
                                 Toast.makeText(context, "Appel en cours",Toast.LENGTH_LONG).show();
-                                startActivity(callIntent);
+                                startActivity(intent);
                             }
                             break;
-                            case 1: shortcutName=applicationsList[1]+contactName;
-                            Toast.makeText(context, "Message en cours",Toast.LENGTH_LONG).show();
+                    case 1: shortcutName=applicationsList[1]+contactName;
+                            intent = new Intent(Intent.ACTION_VIEW);
+                            intent.setData(Uri.parse("sms:"+phoneNumber));
                             if (shorcut==1)
-                                createShortcutOfApp(shortcutName);
-                            Intent sendIntent = new Intent(Intent.ACTION_VIEW);
-                            sendIntent.setData(Uri.parse("sms:"));
-                            startActivity(sendIntent);
+                                createShortcutOfApp2(shortcutName,intent);
+                            else {
+                                Toast.makeText(context, "Message en cours",Toast.LENGTH_LONG).show();
+                                startActivity(intent);
+                            }
                             break;
                     case 2: shortcutName=applicationsList[2]+contactName;
                             Toast.makeText(context, "Suppression en cours",Toast.LENGTH_LONG).show();
